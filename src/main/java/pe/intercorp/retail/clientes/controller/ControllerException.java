@@ -13,19 +13,19 @@ import pe.intercorp.retail.clientes.util.Constantes;
 public class ControllerException {
 	
 	@ExceptionHandler(value = { RuntimeException.class })
-	public ResponseEntity<?> handleExceptions(RuntimeException exa) {
-		MessageResponseCustomerDto messageResponseCustomerDto = new MessageResponseCustomerDto();
-		messageResponseCustomerDto.setResponseCode(Constantes.CODE_BAD_REQUEST);
-		messageResponseCustomerDto.setResponseMessage(Constantes.MESSAGE_BADREQUEST);
-		return new ResponseEntity<>(messageResponseCustomerDto, HttpStatus.OK);
+	public ResponseEntity<MessageResponseCustomerDto> handleExceptionsRunTimeException(RuntimeException exa) {
+		return buildResponseBadRequest();
 	}
 
 	@ExceptionHandler(value = { MethodArgumentNotValidException.class })
-	public ResponseEntity<?> handleExceptions2(MethodArgumentNotValidException exa) {
+	public ResponseEntity<MessageResponseCustomerDto> handleExceptionsNoValidException(MethodArgumentNotValidException exa) {
+		return buildResponseBadRequest();
+	}
+
+	private ResponseEntity<MessageResponseCustomerDto> buildResponseBadRequest() {
 		MessageResponseCustomerDto messageResponseCustomerDto = new MessageResponseCustomerDto();
 		messageResponseCustomerDto.setResponseCode(Constantes.CODE_BAD_REQUEST);
 		messageResponseCustomerDto.setResponseMessage(Constantes.MESSAGE_BADREQUEST);
 		return new ResponseEntity<>(messageResponseCustomerDto, HttpStatus.OK);
 	}
-
 }

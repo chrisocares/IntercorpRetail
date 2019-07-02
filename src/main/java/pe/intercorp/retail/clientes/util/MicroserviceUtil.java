@@ -14,6 +14,8 @@ import pe.intercorp.retail.clientes.dto.CustomerModel;
 
 public class MicroserviceUtil {
 
+	private MicroserviceUtil() { throw new IllegalStateException("Utility class"); }
+	
 	public static String generateTransactionID() {
 		DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(Constantes.DATE_DDMMYYYYHHMMSS);
 		return  Constantes.INTERCORPCUSTOMER

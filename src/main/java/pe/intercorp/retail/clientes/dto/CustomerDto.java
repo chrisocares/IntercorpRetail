@@ -1,6 +1,6 @@
 package pe.intercorp.retail.clientes.dto;
 
-import java.sql.Date;
+import java.util.Date;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
