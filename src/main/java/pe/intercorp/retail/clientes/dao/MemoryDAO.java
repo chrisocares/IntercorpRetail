@@ -41,4 +41,22 @@ public class MemoryDAO {
 			logger.error("ERROR {} " + e.getMessage());
 		}
 	}
+	
+	/**
+	 * When the application starts , first read all the data in the JSON file with a bean. 
+	 * @param customerList
+	 * @return List<CustomerModel>
+	 */
+	public static List<CustomerModel> recoverPersistMemoryCustomer(List<CustomerModel> customerList) {
+		try {
+			File fileJson = new File(Constantes.PATH_JSON);
+			String jsonContent = new String(Files.readAllBytes(fileJson.toPath()), Charset.forName(StandardCharsets.UTF_8.name()));
+			ObjectMapper objectMapper = new ObjectMapper();
+			TypeFactory typeFactory = objectMapper.getTypeFactory();
+			customerList = objectMapper.readValue(jsonContent, typeFactory.constructCollectionType(List.class, CustomerModel.class));			
+		} catch (IOException e) {
+			logger.error("ERROR {} " + e.getMessage());
+		}
+		return customerList;
+	}
 }
