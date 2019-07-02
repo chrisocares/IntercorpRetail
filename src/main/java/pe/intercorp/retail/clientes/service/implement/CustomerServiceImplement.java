@@ -1,5 +1,7 @@
 package pe.intercorp.retail.clientes.service.implement;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Service;
 import pe.intercorp.retail.clientes.dao.MemoryDAO;
 import pe.intercorp.retail.clientes.dto.CustomerDto;
 import pe.intercorp.retail.clientes.dto.CustomerModel;
+import pe.intercorp.retail.clientes.dto.KPICustomerDto;
 import pe.intercorp.retail.clientes.dto.MessageResponseCustomerDto;
 import pe.intercorp.retail.clientes.service.CustomerService;
 import pe.intercorp.retail.clientes.util.Constantes;
@@ -50,5 +53,25 @@ public class CustomerServiceImplement implements CustomerService {
 	@Override
 	public List<CustomerModel> getCustomers() {
 		return customerMemory;
+	}
+
+	@Override
+	public KPICustomerDto getKPICustomers() {
+		int sumPromedio = 0;
+		int sumDesvEstnd = 0;
+		for (CustomerModel customer : customerMemory) {
+			sumPromedio += customer.getEdad();
+		}
+		int edadPromedio = sumPromedio / customerMemory.size();
+		for (CustomerModel customer : customerMemory) {
+			sumDesvEstnd += Math.pow(customer.getEdad() - edadPromedio, 2);
+		}
+		double desvEstandardEdad = Math.sqrt(sumDesvEstnd / customerMemory.size());
+		KPICustomerDto kpiCustomerDto = new KPICustomerDto();
+		kpiCustomerDto.setDesvEstandardEdad(desvEstandardEdad);
+		kpiCustomerDto.setEdadPromedio(edadPromedio);
+		BigDecimal bigDecimal = BigDecimal.valueOf(desvEstandardEdad);
+		kpiCustomerDto.setDesvEstandardEdad(bigDecimal.setScale(2, RoundingMode.HALF_UP).doubleValue());
+		return kpiCustomerDto;
 	}
 }

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import pe.intercorp.retail.clientes.dto.CustomerDto;
 import pe.intercorp.retail.clientes.dto.CustomerModel;
+import pe.intercorp.retail.clientes.dto.KPICustomerDto;
 import pe.intercorp.retail.clientes.dto.MessageResponseCustomerDto;
 import pe.intercorp.retail.clientes.service.CustomerService;
 import pe.intercorp.retail.clientes.util.Constantes;
@@ -45,5 +46,11 @@ public class CustomerController {
 		String messageId = MicroserviceUtil.generateTransactionID();
 		return ResponseEntity.status(HttpStatus.OK).header(Constantes.MESSAGEID, messageId).body(customerList);
 	}
-
+	
+	@GetMapping(value = "/kpideclientes", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public HttpEntity<KPICustomerDto> getkpiCustomers(){
+		KPICustomerDto kpiCustomerDto = customerService.getKPICustomers();
+		String messageId = MicroserviceUtil.generateTransactionID();
+		return ResponseEntity.status(HttpStatus.OK).header(Constantes.MESSAGEID, messageId).body(kpiCustomerDto);
+	}
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import pe.intercorp.retail.clientes.dto.CustomerDto;
 import pe.intercorp.retail.clientes.dto.CustomerModel;
+import pe.intercorp.retail.clientes.dto.KPICustomerDto;
 import pe.intercorp.retail.clientes.dto.MessageResponseCustomerDto;
 
 public interface CustomerService {
@@ -18,4 +19,10 @@ public interface CustomerService {
 	 * @return List<CustomerModel>
 	 */
 	public List<CustomerModel> getCustomers();
+	
+	/**
+	 * Get average age and standard deviation
+	 * @return edadPromedio , desvEstandardEdad
+	 */
+	public KPICustomerDto getKPICustomers();
 }
