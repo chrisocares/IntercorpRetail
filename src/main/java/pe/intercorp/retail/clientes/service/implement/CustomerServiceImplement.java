@@ -62,14 +62,14 @@ public class CustomerServiceImplement implements CustomerService {
 		for (CustomerModel customer : customerMemory) {
 			sumPromedio += customer.getEdad();
 		}
-		int edadPromedio = sumPromedio / customerMemory.size();
+		double edadPromedio = (double) sumPromedio / (double)customerMemory.size();
 		for (CustomerModel customer : customerMemory) {
 			sumDesvEstnd += Math.pow(customer.getEdad() - edadPromedio, 2);
 		}
-		double desvEstandardEdad = Math.sqrt(sumDesvEstnd / customerMemory.size());
+		double desvEstandardEdad = Math.sqrt((double) sumDesvEstnd / (double) customerMemory.size());
 		KPICustomerDto kpiCustomerDto = new KPICustomerDto();
 		kpiCustomerDto.setDesvEstandardEdad(desvEstandardEdad);
-		kpiCustomerDto.setEdadPromedio(edadPromedio);
+		kpiCustomerDto.setEdadPromedio((int)edadPromedio);
 		BigDecimal bigDecimal = BigDecimal.valueOf(desvEstandardEdad);
 		kpiCustomerDto.setDesvEstandardEdad(bigDecimal.setScale(2, RoundingMode.HALF_UP).doubleValue());
 		return kpiCustomerDto;

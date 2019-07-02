@@ -19,14 +19,15 @@ import pe.intercorp.retail.clientes.util.Constantes;
 
 public class MemoryDAO {
 
+	private MemoryDAO() { throw new IllegalStateException("Utility class"); }
+	
 	private static final Log logger = LogFactory.getLog(MemoryDAO.class);
 	
 	/**
 	 * Write in file JSON for persist data
 	 * @param customer
 	 */
-	public static void writePersistMemoryCustomer(CustomerModel customer) {
-		
+	public static void writePersistMemoryCustomer(CustomerModel customer) {		
 		try {
 			File fileJson = new File(Constantes.PATH_JSON);
 			String jsonContent = new String(Files.readAllBytes(fileJson.toPath()), Charset.forName(StandardCharsets.UTF_8.name()));
@@ -59,4 +60,5 @@ public class MemoryDAO {
 		}
 		return customerList;
 	}
+	
 }
