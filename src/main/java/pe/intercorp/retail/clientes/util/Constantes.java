@@ -11,7 +11,7 @@ public class Constantes {
 	public static final String MESSAGE_BADREQUEST = "Request invalido, verifique los campos.";
 	public static final String MESSAGE_SUCCESFULL = "El cliente se creo exitosamente.";
 	public static final String MESSAGE_FAILED = "Ocurrio un error al procesar el mensaje. Intentelo dentro de un momento.";
-	public static final String PATH_JSON = "C:\\Users\\USER\\Documents\\workspace-spring-tool-suite-4-4.3.0.RELEASE\\IntercorpRetail\\src\\main\\resources\\memoryCustomer.json";
+	public static final String PATH_JSON = "D:\\home\\site\\wwwroot\\memoryCustomer.json";
 	
 	protected Constantes() {
 		throw new IllegalAccessError("Clase Constantes");
